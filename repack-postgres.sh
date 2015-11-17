@@ -10,13 +10,16 @@ mkdir -p dist/ target/generated-resources/
 [ -e $LINUX_DIST ] || wget -O $LINUX_DIST "http://get.enterprisedb.com/postgresql/postgresql-$VERSION-linux-x64-binaries.tar.gz"
 
 tar xzf $LINUX_DIST -C $PACKDIR
+cp -R ext/. $PACKDIR/pgsql
 pushd $PACKDIR/pgsql
 tar cjf $OLDPWD/target/generated-resources/postgresql-Linux-x86_64.tbz \
   share/postgresql \
   lib \
   bin/initdb \
   bin/pg_ctl \
-  bin/postgres
+  bin/postgres \
+  $EXT_DIR
+
 popd
 
-rm -fr $PACKDIR
+#rm -fr $PACKDIR
