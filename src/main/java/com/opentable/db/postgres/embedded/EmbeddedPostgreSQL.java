@@ -39,6 +39,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.sql.DataSource;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
@@ -97,7 +98,7 @@ public class EmbeddedPostgreSQL implements Closeable
         if (parentDirectory != null) {
             mkdirs(parentDirectory);
             cleanOldDataDirectories(parentDirectory);
-            this.dataDirectory = Objects.firstNonNull(dataDirectory, new File(parentDirectory, instanceId.toString()));
+            this.dataDirectory = MoreObjects.firstNonNull(dataDirectory, new File(parentDirectory, instanceId.toString()));
         } else {
             this.dataDirectory = dataDirectory;
         }
